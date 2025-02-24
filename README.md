@@ -167,7 +167,6 @@ keyboard.wait("esc")  # Keep the script running
 6️⃣ Press **F6** to start  
 7️⃣ Press **ESC** to stop  
 
-Now it **fully mimics a Brawl Stars joystick + attack button!** 🚀🔥 Let me know if you need more tweaks!
 ---
 
 ### **How This Works:**
