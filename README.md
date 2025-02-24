@@ -18,28 +18,8 @@ pip install -r requirements.txt
 This will install all the necessary Python packages. 🚀
 Python 3.8+
 
-Yes! You can absolutely have **two circles** and randomly click in both areas. Below, I’ll update the script to let you pick **two positions** with separate radii and click randomly within both.
-
 ---
 
-### **Pixel-to-Inch Conversion**
-On **Windows**, the number of pixels per inch (**PPI or DPI**) depends on your display settings:
-- **Standard displays**: ~96 PPI
-- **High-resolution displays** (like 4K monitors): ~150-200+ PPI
-
-To **estimate the radius in inches**, use this formula:
-\[
-\text{radius in inches} = \frac{\text{radius in pixels}}{\text{PPI}}
-\]
-
-For example, if your screen is **96 PPI**:
-- **100 px ≈ 1.04 inches**
-- **200 px ≈ 2.08 inches**
-- **500 px ≈ 5.2 inches**
-
-I’ll also generate a **visual representation** of the radius using `matplotlib` so you can see how big each radius is.
-
----
 
 ### **Updated Python Script (Two Circles + Visual Representation)**
 ```python
