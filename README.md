@@ -2,11 +2,15 @@
 Here’s the `requirements.txt` file for the script:
 
 ```
-pyautogui
-keyboard
-matplotlib
+pyautogui==0.9.54
+keyboard==0.13.5
+matplotlib==3.8.2
+numpy==1.26.4
 tk
-numpy
+time
+threading
+random
+math
 ```
 
 ### **How to Install Dependencies**
