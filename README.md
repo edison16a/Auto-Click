@@ -22,6 +22,15 @@ Python 3.8+
 
 
 ### **Updated Python Script (Two Circles + Visual Representation)**
+Got it! I'll modify the script so that:  
+
+1️⃣ **First circle (joystick movement)** → Moves the mouse **like a Brawl Stars joystick**, with smooth movement in random directions within the radius.  
+2️⃣ **Second circle (attack button)** → Just presses a button at random intervals.  
+3️⃣ **Random clicks** → Still happen for extra variability.  
+
+---
+
+### **Updated Python Code:**
 ```python
 import pyautogui
 import keyboard
@@ -32,8 +41,9 @@ import tkinter as tk
 from tkinter import simpledialog, messagebox
 import matplotlib.pyplot as plt
 import numpy as np
+import math
 
-clicking = False  # Global flag for clicking
+clicking = False
 positions = []  # Stores center points and radii
 
 def pick_positions():
@@ -73,26 +83,52 @@ def visualize_click_areas():
     ax.legend()
     plt.show()
 
-def random_click():
-    """Autoclicks randomly within the two selected circles."""
-    global clicking
+def joystick_movement():
+    """Simulates a joystick movement within the first radius."""
+    x, y, radius = positions[0]
 
     while clicking:
-        for x, y, radius in positions:
-            rand_x = x + random.randint(-radius, radius)
-            rand_y = y + random.randint(-radius, radius)
-            pyautogui.click(rand_x, rand_y)
-            time.sleep(random.uniform(0.1, 0.5))  # Random delay between clicks
+        angle = random.uniform(0, 2 * math.pi)  # Random direction
+        distance = random.uniform(0, radius)  # Random distance within radius
+        move_x = x + int(math.cos(angle) * distance)
+        move_y = y + int(math.sin(angle) * distance)
+
+        pyautogui.moveTo(move_x, move_y, duration=0.05)  # Smooth movement
+        time.sleep(random.uniform(0.05, 0.2))  # Move frequently
+
+def press_attack_button():
+    """Presses the attack button at a fixed rate in the second radius."""
+    x, y, _ = positions[1]
+
+    while clicking:
+        pyautogui.click(x, y)
+        time.sleep(random.uniform(0.2, 0.5))  # Random attack speed
+
+def random_click():
+    """Performs extra random clicks for added variation."""
+    while clicking:
+        x, y, radius = positions[random.randint(0, 1)]  # Choose between both areas
+        rand_x = x + random.randint(-radius, radius)
+        rand_y = y + random.randint(-radius, radius)
+        pyautogui.click(rand_x, rand_y)
+        time.sleep(random.uniform(0.3, 0.7))  # Less frequent than joystick
 
 def start_clicking():
-    """Starts the autoclicking thread."""
+    """Starts all clicking/movement threads."""
     global clicking
     clicking = True
-    thread = threading.Thread(target=random_click, daemon=True)
-    thread.start()
+
+    # Joystick movement
+    threading.Thread(target=joystick_movement, daemon=True).start()
+    
+    # Attack button clicking
+    threading.Thread(target=press_attack_button, daemon=True).start()
+
+    # Extra random clicks
+    threading.Thread(target=random_click, daemon=True).start()
 
 def stop_clicking():
-    """Stops the clicking process."""
+    """Stops all clicking/movement threads."""
     global clicking
     clicking = False
     print("Stopped clicking.")
@@ -114,6 +150,24 @@ print("Press ESC to stop clicking.")
 keyboard.wait("esc")  # Keep the script running
 ```
 
+---
+
+### **What’s New?**
+✅ **First Position (Joystick)** → Moves mouse **smoothly in random directions** like a joystick.  
+✅ **Second Position (Attack Button)** → Clicks like a normal attack button with random timing.  
+✅ **Extra Random Clicks** → Still happen for extra unpredictability.  
+✅ **Balanced Timing** → Joystick moves quickly, attack button has a controlled click rate.  
+
+### **How to Use**
+1️⃣ Run the script  
+2️⃣ Hover over the **joystick position** and press **ENTER**  
+3️⃣ Enter **radius for movement**  
+4️⃣ Hover over the **attack button** and press **ENTER**  
+5️⃣ Enter **radius for attack**  
+6️⃣ Press **F6** to start  
+7️⃣ Press **ESC** to stop  
+
+Now it **fully mimics a Brawl Stars joystick + attack button!** 🚀🔥 Let me know if you need more tweaks!
 ---
 
 ### **How This Works:**
