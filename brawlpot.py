@@ -17,15 +17,15 @@ def press_e_q():
         key = random.choice(['e', 'q'])
         keyboard.press(key)
         keyboard.release(key)
-        # Debug: print(f"Pressed {key}")
+        print(f"Pressed {key}")  # Debug log
 
 def press_r():
-    """Press 'r' every 17-20 seconds at random intervals."""
+    """Press 'f' every 17-20 seconds at random intervals."""
     while automation_running:
         time.sleep(random.uniform(17, 20))
         keyboard.press('f')
         keyboard.release('f')
-        # Debug: print("Pressed r")
+        print("Pressed f")  # Debug log
 
 def hold_wasd():
     """
@@ -37,15 +37,16 @@ def hold_wasd():
         key = random.choice(['w', 'a', 's', 'd'])
         duration = random.uniform(0, 3)
         keyboard.press(key)
+        print(f"Holding {key} for {duration:.2f} seconds")  # Debug log
         time.sleep(duration)
         keyboard.release(key)
-        # Debug: print(f"Held {key} for {duration:.2f} seconds")
+        print(f"Released {key}")  # Debug log
 
 def start_automation():
     """Starts the automation threads."""
     global automation_running, threads
+    print("F8 clicked: Starting automation...")
     if not automation_running:
-        print("Starting automation...")
         automation_running = True
         # Create and start threads for each function
         t1 = threading.Thread(target=press_e_q)
@@ -58,8 +59,8 @@ def start_automation():
 def stop_automation():
     """Stops the automation and waits for threads to finish."""
     global automation_running, threads
+    print("F9 clicked: Stopping automation...")
     if automation_running:
-        print("Stopping automation...")
         automation_running = False
         for t in threads:
             t.join()
