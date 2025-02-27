@@ -1,9 +1,1 @@
-pyautogui==0.9.54
-keyboard==0.13.5
-matplotlib==3.8.2
-numpy==1.26.4
-tk
-time
-threading
-random
-math
+pynput
