@@ -22,25 +22,39 @@ def press_e_q():
 def press_r():
     """Press 'f' every 17-20 seconds at random intervals."""
     while automation_running:
-        time.sleep(random.uniform(17, 20))
+        time.sleep(random.uniform(0.5, 1))
         keyboard.press('f')
         keyboard.release('f')
         print("Pressed f")  # Debug log
 
 def hold_wasd():
     """
-    Every 1 second, pick a random key from [w, a, s, d] and hold it 
-    for a random duration between 0 and 3 seconds.
+    Simulate human-like movement by randomly selecting a movement pattern:
+    - Single keys: 'w', 'a', 's', 'd'
+    - Diagonals: 'wa', 'wd', 'sa', 'sd'
+    - Or no movement for a brief pause.
+    Each pattern is held for a random duration between 0.5 and 3 seconds.
     """
+    # List of possible movement patterns (empty string = pause)
+    move_patterns = ['', 'w', 'a', 's', 'd', 'wa', 'wd', 'sa', 'sd']
     while automation_running:
-        time.sleep(1)
-        key = random.choice(['w', 'a', 's', 'd'])
-        duration = random.uniform(0, 3)
-        keyboard.press(key)
-        print(f"Holding {key} for {duration:.2f} seconds")  # Debug log
-        time.sleep(duration)
-        keyboard.release(key)
-        print(f"Released {key}")  # Debug log
+        pattern = random.choice(move_patterns)
+        if pattern:
+            # Press all keys in the pattern simultaneously (for diagonals)
+            for key in pattern:
+                keyboard.press(key)
+            duration = random.uniform(0.5, 3)
+            print(f"Holding '{pattern}' for {duration:.2f} seconds")
+            time.sleep(duration)
+            for key in pattern:
+                keyboard.release(key)
+            print(f"Released '{pattern}'")
+        else:
+            # Pause (simulate a human taking a brief moment of inaction)
+            pause_duration = random.uniform(0.2, 1)
+            print(f"Pausing movement for {pause_duration:.2f} seconds")
+            time.sleep(pause_duration)
+
 
 def start_automation():
     """Starts the automation threads."""
