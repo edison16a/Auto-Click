@@ -23,8 +23,8 @@ def press_r():
     """Press 'r' every 17-20 seconds at random intervals."""
     while automation_running:
         time.sleep(random.uniform(17, 20))
-        keyboard.press('r')
-        keyboard.release('r')
+        keyboard.press('f')
+        keyboard.release('f')
         # Debug: print("Pressed r")
 
 def hold_wasd():
