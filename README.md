@@ -9,7 +9,7 @@ pynput
 ### How It Works
 
 - **Starting/Stopping:**  
-  Press **F8** to start the automation. This spawns three threads:
+  Press **FN F8** to start the automation. This spawns three threads:
   - One that presses **e** or **q** every 0.5–1 second.
   - One that presses **r** every 17–20 seconds.
   - One that every 1 second picks a random key from **W, A, S, D** and holds it for 0–3 seconds.
